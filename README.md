@@ -22,5 +22,8 @@ export function time2pixel(timeStart: number | Date, timeEnd: number | Date, tim
   }
   return Math.round((timeEvent - timeStart) / (timeEnd - timeStart) * width);
 };
-
 ```
+- To run the tests
+`` yarn test or npm run test
+``
+
