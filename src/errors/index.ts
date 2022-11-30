@@ -1,0 +1,1 @@
+export const INVALID_TIMESTAMP_ERROR = 'Invalid timestamp provided as input';

@@ -1,14 +1,17 @@
+import { INVALID_TIMESTAMP_ERROR } from '../errors';
 import { time2pixel } from '../index';
 
-const timeStart = 1669701600; // 2022-07-15 00:00:00
-const timeEnd = 1669744800; // 2022-07-15 12:00:00
-const timeEvent = 1669734000; // 2022-07-15 09:00:00
+const timeStart = 1669701600; // GMT: Tuesday, 29 November 2022 06:00:00
+const timeEnd = 1669744800; // GMT: Tuesday, 29 November 2022 18:00:00
+const timeEvent = 1669734000; // GMT: Tuesday, 29 November 2022 15:00:00
 
-const timeStartInDate = new Date(timeStart); // 2022-07-15 00:00:00
-const timeEndInDate = new Date(timeEnd); // 2022-07-15 12:00:00
-const timeEventInDate = new Date(timeEvent); // 2022-07-15 09:00:00
+const timeStartInDate = new Date(timeStart); // GMT: Tuesday, 29 November 2022 06:00:00
+const timeEndInDate = new Date(timeEnd); // GMT: Tuesday, 29 November 2022 18:00:00
+const timeEventInDate = new Date(timeEvent); // GMT: Tuesday, 29 November 2022 15:00:00
 
 const width = 800; // 800px
+
+//#region UNIX - Tests
 
 // Test 1: timeEvent is in the middle of the time range
 test('[UNIX] - width expected to be 600px from width 800px', () => {
@@ -24,6 +27,15 @@ test('[UNIX] - width expected to be 800px', () => {
 test('[UNIX] - width expected to be 0px', () => {
   expect(time2pixel(timeStart, timeEnd, timeStart, width)).toBe(0);
 });
+
+// Test 4: Invalid timestamp provided as input
+test('[UNIX] - Invalid timestamp provided as input', () => {
+  expect(() => time2pixel(1, 2, 3, 4)).toThrow(INVALID_TIMESTAMP_ERROR);
+});
+
+//#endregion
+
+//#region DATE - Tests
 
 // Test 4: timeEvent  is in the middle of the time range in Date
 test('[DATE] - width expected to be 600 from width 800px', () => {
@@ -42,5 +54,5 @@ test('[DATE] - width expected to be 0px', () => {
 
 
 
-
+//#endregion
 
